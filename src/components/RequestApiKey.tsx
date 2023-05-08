@@ -8,13 +8,15 @@ import LargeHeading from '@/ui/LargeHeading';
 import Paragraph from '@/ui/Paragraph';
 import CopyButton from '@/components/CopyButton';
 import { Input } from '@/ui/Input';
-import Button from './ui/Button';
+import Button from '@/ui/Button';
 
-const RequestApiKey: FC = () => {
+interface RequestApiKeyProps {}
+
+const RequestApiKey: FC<RequestApiKeyProps> = ({}) => {
 	const [isCreating, setIsCreating] = useState<boolean>(false);
-	const [apiKey, setApiKey] = useState<string | null | void>(null);
+	const [apiKey, setApiKey] = useState<string | null>(null);
 
-	const createNewApiKey = async (e: FormEvent<HTMLFormElement>) => {
+	const createNewApiKey = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setIsCreating(true);
 
@@ -45,10 +47,13 @@ const RequestApiKey: FC = () => {
 		<div className='container md:max-w-2xl'>
 			<div className='flex flex-col gap-6 items-center'>
 				<Key className='mx-auto h-12 w-12 text-grey-400' />
-				<LargeHeading>Request your API Key</LargeHeading>
+				<LargeHeading className='text-center'>Request your API Key</LargeHeading>
 				<Paragraph>You haven&apos;t requested an API key yet.</Paragraph>
 			</div>
 			<form onSubmit={createNewApiKey} className='mt-6 sm:flex sm:items-center' action='#'>
+				<label htmlFor='emails' className='sr-only'>
+					Your API key
+				</label>
 				<div className='relative rounded-md shadow-sm sm:min-w-0 sm:flex-1'>
 					{apiKey ? (
 						<CopyButton

@@ -10,5 +10,5 @@ export async function createApiKey() {
 		}
 		throw new Error(data.error ?? 'Something went wrong.');
 	}
-	return;
+	return data.createdApiKey.key;
 }
