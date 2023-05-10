@@ -11,7 +11,7 @@ const reqSchema = z.object({
 });
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-	const body = (await req.body) as unknown;
+	const body = req.body as unknown;
 
 	const apiKey = req.headers.authorization;
 	if (!apiKey) {
@@ -63,7 +63,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 		if (error instanceof z.ZodError) {
 			return res.status(400).json({ error: error.issues });
 		}
-		return res.status(500).json({ error: 'Internal Server Error' });
+		return res.status(500).json({ error: 'Internal Server Error - Something went wrong' });
 	}
 };
 
